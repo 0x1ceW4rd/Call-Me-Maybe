@@ -2,7 +2,7 @@
 
 Introduction to function calling in LLMs
 
-## All the info I gathered
+## All the info I gathered(Randomly typed)
 
 A GPT or Generative Pre-trained Transformer is a bot that generates text based on a spesific mathematical calcualtion to guess the next word in a sentence, its called pre-trained bc it has a lot of setted rules/parameters that can be fine tuned to better its performance
 
@@ -46,4 +46,72 @@ Tokens: ["un", "happiness"] or ["un", "happy", "ness"] depending on merges.
 IDs: [347, 8921]
 ```
 
-`Logits` or `logistic unit = log(odds)` is a calculated odd (in raw mod aka before softmax) for a token to be the next in a sentence.
+#### Logits & Softmax
+
+##### Logits
+
+`Logits` or `logistic unit = log(odds)` is a calculated odd (in raw mode aka before softmax) for a token to be the next in a sentence.
+
+Odds can be either a chance of how likely something will or will not happen;
+
+Odds = Number of favorable outcomes / Number of unfavorable outcomes
+
+Alternatively, if you know the probability of an event occurring, you can convert it to odds using these formulas:
+
+`Odds in favor`: ``` P/1−P ```
+
+`Odds against`: ``` 1−P/P ```
+
+If odds are expressed as a ratio A:B (where A is chances for success and B is chances against), the probability of winning is calculated as:
+
+``` P(Win)= A/A+B ```
+
+##### Softmax
+
+Softmax is a function that turns logits into probability distubution over the vocabulary.
+
+This ensures all probabilities are between 0 and 1, and they sum to 1 for each position.
+
+It's done by calculating it using this formula:
+
+`probability(word) = e^(logit_for_word) / sum_of_all(e^(logit_for_each_word))`
+
+##### Why not use probabilities directly instead of logits?
+
+Well, its because most models use a cross-entropy function expects raw logits as input, not probabilities. Cross‑entropy compares the model’s raw scores with the correct token and pushes the model to increase the correct token’s logit and decrease others, wich is it's way of training the model.
+
+#### Sampling Methods
+
+After the logits are calculated and went through softmax, the sampling methods come next and uses one of the 3 algorithms to test the next word/token's compatibility with the others and how well it fits, it does that with one of these algorithms:
+
+1- Top-k; Top‑k – sample randomly from the top k highest probabilities.
+2- Top‑p; sample from the smallest set of tokens whose cumulative probability reaches p.
+3- Greedy; pick the highest probability.
+
+### The Generation loop
+
+1- Prompt – User provides a string, e.g., "The capital of France is".
+
+2- Encode – Tokenize the prompt into token IDs: [101, 345, 1200, ...].
+
+3- Forward pass – Pass the token IDs through the model to obtain logits for the next token (at the last position).
+
+4- Sample token – Convert logits to probabilities (softmax) and choose the next token according to some strategy (greedy, top‑k, top‑p, temperature).
+
+5- Append – Add the new token ID to the end of the sequence.
+
+6- Repeat – Feed the extended sequence back into the model, or more efficiently, use the cached key‑value states (KV cache) to only compute the new token.
+
+Stop when:
+
+An end‑of‑sequence token (`<eos>`) is generated.
+
+Maximum length is reached.
+
+A stop condition is met.
+
+### Constraint decoding
+
+constaint decoding is where we change the logits of words/tokens that we dont want in out output and set it's logit to -inf and that makes it equal to 0 after softmax and we keep the others that we want the same or in normal state, in some cases we increase. This forces the model to only sample the valid tokens.
+
+### Finite-State Machine (FSM)
