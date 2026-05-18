@@ -4,7 +4,7 @@ Introduction to function calling in LLMs
 
 ## All the info I gathered(Randomly typed)
 
-A GPT or Generative Pre-trained Transformer is a bot that generates text based on a spesific mathematical calcualtion to guess the next word in a sentence, its called pre-trained bc it has a lot of setted rules/parameters that can be fine tuned to better its performance
+A GPT or Generative Pre-trained Transformer is a bot that generates text based on a spesific mathematical calcualtion to guess the next word in a sentence, its called pre-trained because it has a lot of setted rules/parameters that can be fine tuned to better its performance.
 
 A LLm or Large Language Model is a type of neural network that was trained on enormous size of text based data that could be found online.
 

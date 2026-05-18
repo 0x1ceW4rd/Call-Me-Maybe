@@ -1,20 +1,21 @@
-MAIN = 
-
-run:
-	python3 $(MAIN) 
+.PHONY: install run debug clean lint lint-strict
 
 install:
-	pip install 
+	uv sync
+
+run:
+	uv run python src/main.py --functions_definition data/input/functions_definition.json --input data/input/function_calling_tests.json --output data/output/function_calling_results.json
 
 debug:
-	python3 -m pdb $(NAME)
-
-lint:
-	flake8 .
-	mypy . --warn-return-any --warn-unused-ignores --ignore-missing-imports --disallow-untyped-defs --check-untyped-defs
+	uv run python -m pdb src/main.py $(ARGS)
 
 clean:
-	rm -rf *__pycache__ */*/__pycache__ __pycache__
-	rm -rf .mypy_cache
+	rm -rf __pycache__ .mypy_cache .pytest_cache src/__pycache__
 
-.PHONY: install run debug lint clean
+lint:
+	flake8 src/
+	mypy src/ --warn-return-any --warn-unused-ignores --ignore-missing-imports --disallow-untyped-defs --check-untyped-defs
+
+lint-strict:
+	flake8 src/
+	mypy src/ --strict
