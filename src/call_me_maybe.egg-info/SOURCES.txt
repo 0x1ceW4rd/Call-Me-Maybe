@@ -1,7 +1,6 @@
 LICENSE
 README.md
 pyproject.toml
-src/__init__.py
 src/constrained_generator.py
 src/function_call_dfa.py
 src/function_validator.py
