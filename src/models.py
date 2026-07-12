@@ -1,16 +1,17 @@
 from pydantic import BaseModel
-from typing import Dict, Any
+from typing import Dict
 
-class FunctionDefinition(BaseModel):
+
+class Parameters(BaseModel):
+    type: str
+
+
+class Functions(BaseModel):
     name: str
-    description: str = ""
-    parameters: Dict[str, Dict[str, str]]
-    returns: Dict[str, str] = {}
+    description: str
+    parameters: Dict[str, Parameters]
+    returns: Dict[str, str]
 
-class TestCase(BaseModel):
-    prompt: str
 
-class Result(BaseModel):
+class Prompts(BaseModel):
     prompt: str
-    name: str
-    parameters: Dict[str, Any]
