@@ -99,7 +99,7 @@ def main() -> None:
     )
     print(
         "│ ╚════╝  ╚══════╝ ╚═════╝ ╚═╝  ╚═══╝   "
-        "╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   │"
+        " ╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   │"
     )
     print(
         "│                                      "
@@ -107,7 +107,7 @@ def main() -> None:
     )
     print(
         f"│ {RESET}{BOLD}                       "
-        "[ CONSTRAINED DECODING ACTIVE ]                           {CYAN}│"
+        f"[ CONSTRAINED DECODING ACTIVE ]                           {CYAN}│"
     )
     print(
         f"└─────────────────────────────────────────────"
@@ -119,7 +119,7 @@ def main() -> None:
     for j, prompt in enumerate(proms, start=1):
         print(
             f"\n{BOLD}──────────────────────────────────"
-            "───────────────────────────────{RESET}"
+            f"───────────────────────────────{RESET}"
         )
         print(
             f"{MAGENTA}🚀 [{j}/{len(proms)}] Processing Prompt:"
